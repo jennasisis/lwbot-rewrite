@@ -1,18 +1,29 @@
-exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-  const msg = await message.channel.send(`Ping?`);
-  msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
+const Discord = require(`discord.js`);
+
+module.exports.run = (client, message) => {
+    message.channel.send(new Discord.RichEmbed()
+        .addField(`:ping_pong: Ping`, `Pinging...`)
+        .addField(`left_right_arrow: Latency:`, `Pinging...`)
+        .setColor(54371)
+    ).then(thismessage => {
+        thismessage.edit(new Discord.RichEmbed()
+            .addField(`:ping_pong: Ping`, Math.round(client.ping)+`ms`)
+            .addField(`:left_right_arrow: Latency:`, `${thismessage.createdAt-message.createdAt}ms`)
+            .setColor(54371)
+        );
+    });
 };
 
 exports.conf = {
-  enabled: true,
-  guildOnly: false,
-  aliases: [],
-  permLevel: `User`
+    enabled: true,
+    guildOnly: false,
+    aliases: [],
+    permLevel: `User`
 };
-
+  
 exports.help = {
-  name: `ping`,
-  category: `Miscelaneous`,
-  description: `Ping pong! 🏓`,
-  usage: `ping`
+    name: `ping`,
+    category: `Miscelaneous`,
+    description: `Ping pong! 🏓`,
+    usage: `ping`
 };
