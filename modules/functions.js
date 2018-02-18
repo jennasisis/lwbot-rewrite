@@ -66,7 +66,7 @@ module.exports = (client) => {
     text = text
       .replace(/`/g, "`" + String.fromCharCode(8203))
       .replace(/@/g, "@" + String.fromCharCode(8203))
-      .replace(client.token, "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
+      .replace(client.token, "[TOKEN HIDDEN]");
 
     return text;
   };
@@ -95,7 +95,7 @@ module.exports = (client) => {
     } else if (client.aliases.has(commandName)) {
       command = client.commands.get(client.aliases.get(commandName));
     }
-    if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
+    if (!command) return `The command \`${commandName}\` doesn't seem to exist, nor is it an alias. Try again!`;
   
     if (command.shutdown) {
       await command.shutdown(client);
@@ -130,8 +130,6 @@ module.exports = (client) => {
   process.on("uncaughtException", (err) => {
     const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
     client.logger.error(`Uncaught Exception: ${errorMsg}`);
-    // Always best practice to let the code crash on uncaught exceptions. 
-    // Because you should be catching them anyway.
     process.exit(1);
   });
 
