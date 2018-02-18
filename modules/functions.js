@@ -41,7 +41,7 @@ module.exports = (client) => {
     const filter = m => m.author.id === msg.author.id;
     await msg.channel.send(question);
     try {
-      const collected = await msg.channel.awaitMessages(filter, { max: 1, time: limit, errors: ["time"] });
+      const collected = await msg.channel.awaitMessages(filter, { max: 1, time: limit, errors: [`time`] });
       return collected.first().content;
     } catch (e) {
       return false;
@@ -58,15 +58,15 @@ module.exports = (client) => {
   This is mostly only used by the Eval and Exec commands.
   */
   client.clean = async (client, text) => {
-    if (text && text.constructor.name == "Promise")
+    if (text && text.constructor.name == `Promise`)
       text = await text;
-    if (typeof evaled !== "string")
-      text = require("util").inspect(text, {depth: 0});
+    if (typeof evaled !== `string`)
+      text = require(`util`).inspect(text, {depth: 0});
 
     text = text
-      .replace(/`/g, "`" + String.fromCharCode(8203))
-      .replace(/@/g, "@" + String.fromCharCode(8203))
-      .replace(client.token, "[TOKEN HIDDEN]");
+      .replace(/`/g, `\`` + String.fromCharCode(8203))
+      .replace(/@/g, `@` + String.fromCharCode(8203))
+      .replace(client.token, `[TOKEN HIDDEN]`);
 
     return text;
   };
@@ -120,20 +120,20 @@ module.exports = (client) => {
   // <Array>.random() returns a single random element from an array
   // [1, 2, 3, 4, 5].random() can return 1, 2, 3, 4 or 5.
   Array.prototype.random = function() {
-    return this[Math.floor(Math.random() * this.length)]
+    return this[Math.floor(Math.random() * this.length)];
   };
 
   // `await client.wait(1000);` to "pause" for 1 second.
-  client.wait = require("util").promisify(setTimeout);
+  client.wait = require(`util`).promisify(setTimeout);
 
   // These 2 process methods will catch exceptions and give *more details* about the error and stack trace.
-  process.on("uncaughtException", (err) => {
-    const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
+  process.on(`uncaughtException`, (err) => {
+    const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, `g`), `./`);
     client.logger.error(`Uncaught Exception: ${errorMsg}`);
     process.exit(1);
   });
 
-  process.on("unhandledRejection", err => {
+  process.on(`unhandledRejection`, err => {
     client.logger.error(`Unhandled rejection: ${err}`);
   });
 };
