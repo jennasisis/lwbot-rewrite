@@ -31,7 +31,7 @@ exports.run = async (client, message, args, level) => {
                 output += `\u200b\n== ${cat} ==\n`;
                 currentCategory = cat;
             }
-            output += `${settings.prefix}${c.help.name}${` `.repeat(longest - c.help.name.length)} :: ${c.help.description} ::\n`;
+            output += `${settings.prefix}${c.help.name}${` `.repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
         });
         await message.react(`✅`);
         await message.author.send(new Discord.RichEmbed().setDescription(`\`\`\`asciidoc\n${output}\n\`\`\``).setColor(`0x59D851`));

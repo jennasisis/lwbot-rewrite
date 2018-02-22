@@ -28,6 +28,7 @@
     "discord.js": "^11.3.0",
     "enmap": "^0.4.2",
     "enmap-level": "^1.0.0",
+    "ffmpeg-binaries": "^3.2.2-3",
     "moment": "^2.20.1",
     "moment-duration-format": "^2.2.0"
   }
