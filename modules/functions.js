@@ -74,7 +74,7 @@ module.exports = (client) => {
     client.loadCommand = (commandName) => {
         try {
             const props = require(`../commands/${commandName}`);
-            client.logger.log(`Loading Command: ${props.help.name}. 👌`);
+            client.logger.log(`Loading Command: ${props.help.name}`);
             if (props.init) {
                 props.init(client);
             }
@@ -115,7 +115,7 @@ module.exports = (client) => {
     // "Mary had a little lamb".toProperCase() returns "Mary Had A Little Lamb"
     String.prototype.toProperCase = function() {
         return this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-    };    
+    };
   
     // <Array>.random() returns a single random element from an array
     // [1, 2, 3, 4, 5].random() can return 1, 2, 3, 4 or 5.
