@@ -9,6 +9,8 @@ const readdir = promisify(require(`fs`).readdir);
 const Enmap = require(`enmap`);
 const EnmapLevel = require(`enmap-level`);
 const client = new Discord.Client();
+const currency = new Discord.Collection();
+const { Users, CurrencyShop } = require('./dbObjects');
 
 const sequelize = new Sequelize('database', 'user', 'password', {
     host: 'localhost',

@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
         dialect: `sqlite`,
         logging: false,
         // SQLite only
-        storage: `tags.sqlite`,
+        storage: `../tags.sqlite`,
     });
     
     const Tags = sequelize.define(`tags`, {
@@ -38,7 +38,8 @@ module.exports.run = async (client, message, args) => {
         if (e.name === `SequelizeUniqueConstraintError`) {
             return message.reply(`That tag already exists.`);
         }
-        return message.reply(`Something went wrong with adding a tag.`);
+        return message.reply(`Something went wrong with adding a tag.
+        ${e}`);
     }
 };
 
@@ -52,6 +53,6 @@ exports.conf = {
 exports.help = {
     name: `addTag`,
     description: `Adds a tag to the database`,
-    usage: `addTag <tag name> <tag data> -Tag name must be one word-`,
+    usage: `addTag <tag name> <tag data>\n**Tag name must be one word**`,
     category: `Tags`
 };
