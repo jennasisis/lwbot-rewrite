@@ -14,7 +14,7 @@
     "moment": "^2.21.0",
     "moment-duration-format": "^2.2.2",
     "pm2": "^2.10.1",
-    "sequelize": "^4.36.1",
+    "sequelize": "^4.37.0",
     "speech-to-text": "^0.7.4",
     "sqlite3": "^3.1.13",
     "urban-dictionary": "^1.0.6",

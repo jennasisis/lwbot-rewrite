@@ -4,17 +4,17 @@ const Discord = require(`discord.js`);
 require(`moment-duration-format`);
 
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
-    const duration = moment.duration(client.uptime).format(` D [days], H [hrs], m [mins], s [secs]`);
-    message.channel.send(new Discord.RichEmbed()
-        .setTitle(`\`Statistics\``)
-        .addField(`Mem Usage`, `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`)
-        .addField(`Uptime`, duration)
-        .addField(`Discord.js`, `v${version}`)
-        .addField(`Node`, process.version)
-        .setColor(`0x59D851`)
-    );
+  const duration = moment.duration(client.uptime).format(` D [days], H [hrs], m [mins], s [secs]`);
+  message.channel.send(new Discord.RichEmbed()
+    .setTitle(`\`Statistics\``)
+    .addField(`Mem Usage`, `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`)
+    .addField(`Uptime`, duration)
+    .addField(`Discord.js`, `v${version}`)
+    .addField(`Node`, process.version)
+    .setColor(`0x59D851`)
+  );
     
-    /* message.channel.send(`= STATISTICS =
+  /* message.channel.send(`= STATISTICS =
         • Mem Usage  :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB
         • Uptime     :: ${duration}
         • Users      :: ${client.users.size.toLocaleString()}
@@ -25,15 +25,15 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
 };
 
 exports.conf = {
-    enabled: true,
-    guildOnly: false,
-    aliases: [],
-    permLevel: `User`
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: `User`
 };
 
 exports.help = {
-    name: `stats`,
-    category: `Misc`,
-    description: `Gives some useful bot statistics`,
-    usage: `stats`
+  name: `stats`,
+  category: `Misc`,
+  description: `Gives some useful bot statistics`,
+  usage: `stats`
 };
