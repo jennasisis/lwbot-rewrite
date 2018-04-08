@@ -1,7 +1,5 @@
 const Sequelize = require(`sequelize`);
 const Discord = require(`discord.js`);
-const { Users, CurrencyShop } = require(`../dbObjects`);
-const currency = new Discord.Collection();
 const sequelize = new Sequelize(`database`, `user`, `password`, {
   host: `localhost`,
   dialect: `sqlite`,
@@ -36,6 +34,4 @@ module.exports = async client => {
   client.guilds.filter(g => !client.settings.has(g.id)).forEach(g => client.settings.set(g.id, client.config.defaultSettings));
 
   Tags.sync();
-  const storedBalances = await Users.findAll();
-  storedBalances.forEach(b => currency.set(b.user_id, b));
 };
