@@ -101,9 +101,53 @@ module.exports = async client => {
 
   setInterval(() => {
     var randomPl = playings.randomElement(playings);
-    client.user.setActivity(randomPl[0], randomPl[1]);
-  }, 15000);
+    client.user.setActivity(`${randomPl[0]} | !w help`, randomPl[1]);
+  }, 60000);
 
-  // Auto eslint! [Every 5 minutes]
-  setInterval(() => require(`child_process`).exec(`eslint . --fix`), 300000);
+  // Webhooks support
+  var date = new Date();
+  var day = date.toDateString().substring(0, 3);
+  var time = date.toTimeString().substring(0, 2);
+  const hook = new Discord.WebhookClient(`447143362219212820`, client.config.webhookToken);
+  var channel = client.channels.get(`447132033173422090`);
+  
+  var data = {
+    monday: require(`../webhook-data/monday.json`),
+    tuesday: require(`../webhook-data/tuesday.json`),
+    wednesday: require(`../webhook-data/wednesday.json`),
+    thursday: require(`../webhook-data/thursday.json`),
+    friday: require(`../webhook-data/friday.json`),
+    saturday: require(`../webhook-data/saturday.json`),
+    sunday: require(`../webhook-data/sunday.json`)
+  };
+
+  function postIt() {
+    if (time === `00`) {
+      switch (day) {
+        case `Mon`: 
+          channel.bulkDelete(1);
+          hook.send(data.monday);
+        case `Tue`: 
+          channel.bulkDelete(1);
+          hook.send(data.tuesday);
+        case `Wed`: 
+          channel.bulkDelete(1);
+          hook.send(data.wednesday);
+        case `Thu`: 
+          channel.bulkDelete(1);
+          hook.send(data.thursday);
+        case `Fri`: 
+          channel.bulkDelete(1);
+          hook.send(data.friday);
+        case `Sat`: 
+          channel.bulkDelete(1);
+          hook.send(data.saturday);
+        case `Sun`: 
+          channel.bulkDelete(1);
+          hook.send(data.sunday);
+      }
+    } else return;
+  }
+
+  setInterval(postIt, 15000);
 };

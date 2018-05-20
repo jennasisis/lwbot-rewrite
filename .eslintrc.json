@@ -54,6 +54,7 @@
           "ignoreReadBeforeAssign": false
         }
       ], 
-      "no-unused-vars": "off"
+      "no-unused-vars": "off",
+      "no-fallthrough": "off"
     }
   }

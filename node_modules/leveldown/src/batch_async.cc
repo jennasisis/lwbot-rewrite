@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2017 LevelDOWN contributors
+/* Copyright (c) 2012-2018 LevelDOWN contributors
  * See list at <https://github.com/level/leveldown#contributing>
  * MIT License <https://github.com/level/leveldown/blob/master/LICENSE.md>
  */
@@ -12,16 +12,11 @@ namespace leveldown {
 
 /** NEXT WORKER **/
 
-BatchWriteWorker::BatchWriteWorker (
-    Batch* batch
-  , Nan::Callback *callback
-) : AsyncWorker(NULL, callback)
-  , batch(batch)
-{};
+BatchWriteWorker::BatchWriteWorker(Batch* batch, Nan::Callback *callback)
+  : AsyncWorker(NULL, callback, "leveldown:batch.write"), batch(batch)
+{}
 
-BatchWriteWorker::~BatchWriteWorker () {}
-
-void BatchWriteWorker::Execute () {
+void BatchWriteWorker::Execute() {
   SetStatus(batch->Write());
 }
 

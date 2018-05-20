@@ -29,7 +29,7 @@ module.exports.run = (client, message, args) => { // eslint-disable-line no-unus
     var guildCreatedAt = new Date(message.guild.createdTimestamp);
 
     //Pretty-ifies the region
-    var region = `Wumpus Land`;
+    var region;
     if (message.guild.region === `us-east`) {region = `<:regionFlagUSA:393889521449566208> Eastern USA`;}
     else if (message.guild.region === `brazil`) {region = `<:regionFlagBrazil:393889521177198602> Brazil`;}
     else if (message.guild.region === `eu-central`) {region = `<:regionFlagEurope:393889521155964929> Central Europe`;}
@@ -42,10 +42,10 @@ module.exports.run = (client, message, args) => { // eslint-disable-line no-unus
     else if (message.guild.region === `us-south`) {region = `<:regionFlagUSA:393889521449566208> Southern USA`;}
     else if (message.guild.region === `us-west`) {region = `<:regionFlagUSA:393889521449566208> Western USA`;}
     else if (message.guild.region === `eu-west`) {region = `<:regionFlagEurope:393889521155964929> Western Europe`;}
-    else {region = `<:regionFlagWumpus:393900238244675606> Wumpus Land (Unknown)`;}
+    else {region = `<:regionFlagWumpus:393900238244675606> Wumpus Land (Unknown / Error)`;}
 
     //Verification level checker
-    var verification = `Default`;
+    var verification;
 
     if (message.guild.verificationLevel === 0) {verification = `None`;}
     else if (message.guild.verificationLevel === 1) {verification = `Low`;}

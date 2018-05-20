@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2017 LevelDOWN contributors
+/* Copyright (c) 2012-2018 LevelDOWN contributors
  * See list at <https://github.com/level/leveldown#contributing>
  * MIT License <https://github.com/level/leveldown/blob/master/LICENSE.md>
  */
@@ -16,15 +16,13 @@ namespace leveldown {
 
 class NextWorker : public AsyncWorker {
 public:
-  NextWorker (
-      Iterator* iterator
-    , Nan::Callback *callback
-    , void (*localCallback)(Iterator*)
-  );
+  NextWorker(Iterator* iterator,
+             Nan::Callback *callback,
+             void (*localCallback)(Iterator*));
 
-  virtual ~NextWorker ();
-  virtual void Execute ();
-  virtual void HandleOKCallback ();
+  virtual ~NextWorker() {}
+  virtual void Execute();
+  virtual void HandleOKCallback();
 
 private:
   Iterator* iterator;
@@ -35,14 +33,11 @@ private:
 
 class EndWorker : public AsyncWorker {
 public:
-  EndWorker (
-      Iterator* iterator
-    , Nan::Callback *callback
-  );
+  EndWorker(Iterator* iterator, Nan::Callback *callback);
 
-  virtual ~EndWorker ();
-  virtual void Execute ();
-  virtual void HandleOKCallback ();
+  virtual ~EndWorker() {}
+  virtual void Execute();
+  virtual void HandleOKCallback();
 
 private:
   Iterator* iterator;

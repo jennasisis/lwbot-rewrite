@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2017 LevelDOWN contributors
+/* Copyright (c) 2012-2018 LevelDOWN contributors
  * See list at <https://github.com/level/leveldown#contributing>
  * MIT License <https://github.com/level/leveldown/blob/master/LICENSE.md>
  */
@@ -330,7 +330,13 @@ NAN_METHOD(Iterator::Next) {
   v8::Local<v8::Function> callback = info[0].As<v8::Function>();
 
   if (iterator->ended) {
-    LD_RETURN_CALLBACK_OR_ERROR(callback, "iterator has ended");
+    if (!callback.IsEmpty() && callback->IsFunction()) {
+      v8::Local<v8::Value> argv[] = { Nan::Error("iterator has ended") };
+      LD_RUN_CALLBACK("leveldown:iterator.next", callback, 1, argv);
+      info.GetReturnValue().SetUndefined();
+      return;
+    }
+    return Nan::ThrowError("iterator has ended");
   }
 
   NextWorker* worker = new NextWorker(
