@@ -123,7 +123,14 @@ module.exports = async client => {
 
   function postIt(){
     if (time === "00:00:00") {
-      // Insert better code here
+      if (day === "Mon") {channel.bulkDelete(1); hook.send(data.monday)}
+      else if (day === "Tue") {channel.bulkDelete(1); hook.send(data.tuesday)}
+      else if (day === "Wed") {channel.bulkDelete(1); hook.send(data.wednesday)}
+      else if (day === "Thu") {channel.bulkDelete(1); hook.send(data.thursday)}
+      else if (day === "Fri") {channel.bulkDelete(1); hook.send(data.friday)}
+      else if (day === "Sat") {channel.bulkDelete(1); hook.send(data.saturday)}
+      else if (day === "Sun") {channel.bulkDelete(1); hook.send(data.sunday)}
+      else {channel.send("@Akii#0008, something has gone wrong.")}
     } else return;
   }
 
