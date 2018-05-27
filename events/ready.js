@@ -107,7 +107,7 @@ module.exports = async client => {
   // Webhooks support
   var date = new Date();
   var day = date.toDateString().substring(0, 3);
-  var time = date.toTimeString().substring(0, 2);
+  var time = date.toTimeString().substring(0, 8);
   const hook = new Discord.WebhookClient(`447143362219212820`, client.config.webhookToken);
   var channel = client.channels.get(`447132033173422090`);
   
@@ -121,31 +121,16 @@ module.exports = async client => {
     sunday: require(`../webhook-data/sunday.json`)
   };
 
-  function postIt() {
-    if (time === `00`) {
-      switch (day) {
-        case `Mon`: 
-          channel.bulkDelete(1);
-          hook.send(data.monday);
-        case `Tue`: 
-          channel.bulkDelete(1);
-          hook.send(data.tuesday);
-        case `Wed`: 
-          channel.bulkDelete(1);
-          hook.send(data.wednesday);
-        case `Thu`: 
-          channel.bulkDelete(1);
-          hook.send(data.thursday);
-        case `Fri`: 
-          channel.bulkDelete(1);
-          hook.send(data.friday);
-        case `Sat`: 
-          channel.bulkDelete(1);
-          hook.send(data.saturday);
-        case `Sun`: 
-          channel.bulkDelete(1);
-          hook.send(data.sunday);
-      }
+  function postIt(){
+    if (time === "00:00:00") {
+      if (day === "Mon") {channel.bulkDelete(1); hook.send(data.monday)}
+      else if (day === "Tue") {channel.bulkDelete(1); hook.send(data.tuesday)}
+      else if (day === "Wed") {channel.bulkDelete(1); hook.send(data.wednesday)}
+      else if (day === "Thu") {channel.bulkDelete(1); hook.send(data.thursday)}
+      else if (day === "Fri") {channel.bulkDelete(1); hook.send(data.friday)}
+      else if (day === "Sat") {channel.bulkDelete(1); hook.send(data.saturday)}
+      else if (day === "Sun") {channel.bulkDelete(1); hook.send(data.sunday)}
+      else {channel.send("@Akii#0008, something has gone wrong.")}
     } else return;
   }
 
