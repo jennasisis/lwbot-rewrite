@@ -1,13 +1,8 @@
+const Discord = require(`discord.js`);
 exports.run = (client, message) => {
-  const config = require(`../config.json`);
-  const Discord = require(`discord.js`);
-
-  var giphy = require(`giphy-api`)(config.giphy);
-
+  var giphy = require(`giphy-api`)(client.config.giphy);
   var sweetheart = message.mentions.users.first();
-
-  message.guild.member(sweetheart).id;
-
+  
   giphy.random({
     tag: `kiss sexy kissing hot makeout`,
     limit: 1,
@@ -18,7 +13,7 @@ exports.run = (client, message) => {
     var words = myArray[Math.floor(Math.random() * myArray.length)];
         
     message.channel.send(new Discord.RichEmbed()
-      .setTitle(message.author.username + ` and ` + sweetheart.username + ` are ` + words + ` give em a bit of privacy💏❤️`)
+      .setTitle(`${message.author.tag} and ${message.mentions.users.first()} are ${words}, give em a bit of privacy!`)
       .setImage(res.data.image_url)
     );
   });
